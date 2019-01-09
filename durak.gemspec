@@ -5,13 +5,13 @@ require "durak/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "durak"
-  spec.version       = Durak::VERSION
+  spec.version       = CardGame::VERSION
   spec.authors       = ["Morgan Peters"]
   spec.email         = ["morleegan@yahoo.com"]
 
   spec.summary       = %q{A card game program know as durak (russion for idiot).}
   spec.description   = %q{Durak is a complex card game that is well known in Russian.It is an offensive, defensive game that also involves a trump suit. Rules noted in README.}
-  spec.homepage      = "https://github.com/morleegan/durak.git"
+  spec.homepage      = "https://github.com/morleegan/card_games.git"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

@@ -2,19 +2,30 @@ require_relative "card"
 
 class Cards
   # Ordered cards created as a suit and value pair.
-  attr_accessor :suits
-  attr_accessor :values
-  attr_accessor :cards
+  attr_accessor :suits, :cards, :values
 
   def initialize(card_suits: nil, card_values: nil)
     @suits = card_suits.nil? ? %w[
       Heart Spade Diamond Club
     ] : card_suits
     @values = card_values.nil? ? %w[
-      K Q J 10 9 8 7 6
+      A K Q J 10 9 8 7 6
     ] : card_values
     @cards = @suits.map { |suit| @values.map { |value| Card.new(suit, value) } }
     @cards.flatten!
+  end
+
+  def get_cards
+    @cards
+  end
+
+  def add(new_card)
+    # add cards to end of stack
+    @cards.push(new_card)
+  end
+
+  def get_num_of_cards
+    @cards.length
   end
 
   def shuffle
@@ -30,17 +41,17 @@ class Deck < Cards
   # Unordered Cards taken from the Card Ordered class.
   def initialize
     super
-    self.shuffle
+    @cards.shuffle!
   end
 
-  def take(num_of_cards)
+  def draw(num_of_cards)
     @cards.slice!(0, num_of_cards)
   end
 
   def deal(all_players, cards_dealt)
     i = 0
     while i < cards_dealt
-      all_players.each { |player| player.hand.take(self.draw) }
+      all_players.each { |player| player.hand.add(self.draw(1)) }
       i += 1
     end
   end
@@ -52,21 +63,26 @@ class Hand < Cards
     @cards = []
   end
 
-  def get_cards
-    @cards
-  end
-
-  def get_num_of_cards
-    @cards.length
-  end
-
-  def draw(new_cards)
-    # card modifier
+  def add(new_cards)
+    # add multiple cards to hand
     @cards = @cards + new_cards
   end
 
-  def play(val)
-    @cards.slice!(val)
+  def select
+    while loop
+      puts 'Select card value'
+      new_card = gets.chomp
+      cards_av = @cards.get_num_of_cards - 1
+      if !new_card.match(/[^[:digit:]]+/)
+        new_card = new_card.to_i
+        if new_card <= cards_av && new_card > 0
+          puts 'Card selection was ' + new_card.to_s
+          return @cards.slice!(new_card)
+        end
+      else
+        puts 'Card has to be a value between 0 and ' + cards_av.to_s
+      end
+    end
   end
 
   def play_multiple(vals)

@@ -1,4 +1,6 @@
 class Card
+  attr_accessor :suit, :value
+
   def initialize(suit, val)
     @suit = suit
     @value = val
@@ -8,6 +10,3 @@ class Card
     @value + ' of ' + @suit + 's'
   end
 end
-
-# card = Card.new('Heart', '9')
-# card.to_s

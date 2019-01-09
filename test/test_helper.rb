@@ -1,4 +1,4 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
-require "durak"
+require "card_game"
 
 require "minitest/autorun"

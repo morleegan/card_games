@@ -1,7 +1,7 @@
 require_relative "deck"
-include Hand
 
 class Player
+  attr_accessor :name, :hand
   def initialize(name: 'Player')
     @name=name  # name of player
     @hand=Hand.new # cards in hand

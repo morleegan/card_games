@@ -2,7 +2,7 @@ require "test_helper"
 
 class DurakTest < Minitest::Test
   def test_that_it_has_a_version_number
-    refute_nil ::Durak::VERSION
+    refute_nil ::CardGame::VERSION
   end
 
   def test_it_does_something_useful
